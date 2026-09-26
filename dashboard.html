@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MoneyBloom | Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-protected="true">
+
+    <div class="app-layout">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">🌱</div>
+
+                <div>
+                    <h2>MoneyBloom</h2>
+                    <span>Manage • Save • Grow</span>
+                </div>
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <a href="dashboard.html" class="nav-item active">
+                    <span>🏠</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="transactions.html" class="nav-item">
+                    <span>💸</span>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="budget-savings.html" class="nav-item">
+                    <span>🌱</span>
+                    <span>Budget & Savings</span>
+                </a>
+
+                <a href="settings.html" class="nav-item">
+                    <span>⚙️</span>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+
+            <button class="logout-button" onclick="logout()">
+                <span>🚪</span>
+                <span>Logout</span>
+            </button>
+
+        </aside>
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <main class="main-content">
+
+            <!-- Top bar -->
+
+            <header class="topbar">
+
+                <div>
+                    <p class="page-label">MoneyBloom</p>
+                    <h1>Dashboard</h1>
+                </div>
+
+                <div class="profile-area">
+                    <div class="profile-icon">
+                        👤
+                    </div>
+
+                    <div class="profile-text">
+                        <span>Welcome</span>
+                        <strong id="userName">User</strong>
+                    </div>
+                </div>
+
+            </header>
+
+
+            <!-- ================= WELCOME ================= -->
+
+            <section class="welcome-section">
+
+                <h2 id="welcomeMessage">
+                    Welcome back! 👋
+                </h2>
+
+                <p>
+                    Here's your financial overview.
+                </p>
+
+            </section>
+
+
+            <!-- ================= SUMMARY CARDS ================= -->
+
+            <section class="summary-cards">
+
+                <!-- Balance -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon balance-icon">
+                        💰
+                    </div>
+
+                    <div>
+                        <p>Balance</p>
+
+                        <h3 id="balanceAmount">
+                            ₹0
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <!-- Income -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon income-icon">
+                        📈
+                    </div>
+
+                    <div>
+                        <p>Income</p>
+
+                        <h3 id="incomeAmount">
+                            ₹0
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <!-- Expenses -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon expense-icon">
+                        💸
+                    </div>
+
+                    <div>
+                        <p>Expenses</p>
+
+                        <h3 id="expenseAmount">
+                            ₹0
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <!-- Savings -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon savings-icon">
+                        🌱
+                    </div>
+
+                    <div>
+                        <p>Savings</p>
+
+                        <h3 id="savingsAmount">
+                            ₹0
+                        </h3>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= LOWER DASHBOARD ================= -->
+
+            <section class="dashboard-lower">
+
+
+                <!-- GRAPH -->
+
+                <div class="dashboard-card graph-card">
+
+                    <div class="card-heading">
+
+                        <div>
+                            <h2>Income & Expense</h2>
+                            <p>Monthly overview</p>
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container">
+
+                        <canvas id="incomeExpenseChart"></canvas>
+
+                        <div
+                            id="emptyChartMessage"
+                            class="empty-chart-message"
+                        >
+                            Add transactions to see your graph.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT SIDE -->
+
+                <div class="dashboard-side">
+
+
+                    <!-- BUDGET -->
+
+                    <div class="dashboard-card budget-summary">
+
+                        <div class="small-card-heading">
+
+                            <div class="small-card-icon">
+                                🎯
+                            </div>
+
+                            <div>
+                                <h2>Budget</h2>
+                                <p>Monthly spending</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="budget-values">
+
+                            <div>
+                                <span>Spent</span>
+
+                                <strong id="dashboardBudgetSpent">
+                                    ₹0
+                                </strong>
+                            </div>
+
+                            <div>
+                                <span>Budget</span>
+
+                                <strong id="dashboardBudgetTotal">
+                                    ₹0
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                id="dashboardBudgetProgress"
+                            ></div>
+
+                        </div>
+
+
+                        <p
+                            class="progress-text"
+                            id="dashboardBudgetText"
+                        >
+                            Set your monthly budget
+                        </p>
+
+                    </div>
+
+
+                    <!-- SAVINGS -->
+
+                    <div class="dashboard-card savings-summary">
+
+                        <div class="small-card-heading">
+
+                            <div class="small-card-icon">
+                                🌱
+                            </div>
+
+                            <div>
+                                <h2>Savings</h2>
+                                <p>Your current goal</p>
+                            </div>
+
+                        </div>
+
+
+                        <div id="dashboardSavingsContent">
+
+                            <div class="savings-goal-name">
+                                No savings goal yet
+                            </div>
+
+                            <div class="savings-amounts">
+
+                                <strong>₹0</strong>
+
+                                <span>/ ₹0</span>
+
+                            </div>
+
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill"
+                                    style="width: 0%"
+                                ></div>
+
+                            </div>
+
+
+                            <p class="progress-text">
+                                Add a savings goal to get started.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Chart library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Common API & JavaScript -->
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Dashboard JavaScript -->
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>

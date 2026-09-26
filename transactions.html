@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MoneyBloom | Transactions</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-protected="true">
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">🌱</div>
+
+            <div>
+                <h2>MoneyBloom</h2>
+                <span>Manage • Save • Grow</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="transactions.html" class="nav-item active">
+                <span>💸</span>
+                <span>Transactions</span>
+            </a>
+
+            <a href="budget-savings.html" class="nav-item">
+                <span>🌱</span>
+                <span>Budget & Savings</span>
+            </a>
+
+            <a href="settings.html" class="nav-item">
+                <span>⚙️</span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <button class="logout-button" onclick="logout()">
+            <span>🚪</span>
+            <span>Logout</span>
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <p class="page-label">MoneyBloom</p>
+                <h1>Transactions</h1>
+            </div>
+
+            <div class="profile-area">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <div class="profile-text">
+                    <span>Welcome</span>
+                    <strong id="userName">User</strong>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE INTRO -->
+
+        <section class="welcome-section">
+
+            <h2>Manage your money 💰</h2>
+
+            <p>
+                Add and keep track of your income and expenses.
+            </p>
+
+        </section>
+
+
+        <!-- ACTION BUTTONS -->
+
+        <section class="transaction-actions">
+
+            <button
+                class="transaction-action expense-action"
+                onclick="openTransactionModal('expense')"
+            >
+                <span>💸</span>
+                <div>
+                    <strong>Add Expense</strong>
+                    <small>Record money spent</small>
+                </div>
+            </button>
+
+
+            <button
+                class="transaction-action income-action"
+                onclick="openTransactionModal('income')"
+            >
+                <span>📈</span>
+                <div>
+                    <strong>Add Income</strong>
+                    <small>Record money received</small>
+                </div>
+            </button>
+
+        </section>
+
+
+        <!-- TRANSACTION LIST -->
+
+        <section class="transaction-card">
+
+            <div class="transaction-card-header">
+
+                <div>
+                    <h2>All Transactions</h2>
+
+                    <p>
+                        Your income and expenses
+                    </p>
+                </div>
+
+                <div class="transaction-header-actions">
+                    <span
+                        id="transactionCount"
+                        class="transaction-count"
+                    >
+                        0 transactions
+                    </span>
+                    <button type="button" class="export-transactions-btn" onclick="exportTransactions()">
+                        ⬇️ Export
+                    </button>
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH & FILTER -->
+
+            <div class="transaction-controls">
+
+                <div class="search-box">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="searchTransaction"
+                        placeholder="Search transactions..."
+                    >
+
+                </div>
+
+
+                <select id="transactionFilter">
+
+                    <option value="all">
+                        All Transactions
+                    </option>
+
+                    <option value="income">
+                        Income
+                    </option>
+
+                    <option value="expense">
+                        Expenses
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- LIST -->
+
+            <div
+                id="transactionList"
+                class="transaction-list"
+            ></div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                id="emptyTransactions"
+                class="empty-transactions"
+            >
+
+                <div class="empty-icon">
+                    🌱
+                </div>
+
+                <h3>No transactions yet</h3>
+
+                <p>
+                    Add your first income or expense to get started.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= TRANSACTION MODAL ================= -->
+
+<div
+    id="transactionModal"
+    class="modal-overlay hidden"
+>
+
+    <div class="transaction-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeTransactionModal()"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-title">
+
+            <div
+                id="modalIcon"
+                class="modal-icon"
+            >
+                💸
+            </div>
+
+            <div>
+                <h2 id="modalTitle">
+                    Add Expense
+                </h2>
+
+                <p id="modalDescription">
+                    Record a new expense.
+                </p>
+            </div>
+
+        </div>
+
+
+        <form
+            id="transactionForm"
+            onsubmit="saveTransaction(event)"
+        >
+
+            <!-- ITEM -->
+
+            <div class="form-group">
+
+                <label for="transactionItem">
+                    Item
+                </label>
+
+                <input
+                    type="text"
+                    id="transactionItem"
+                    placeholder="Enter item name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- CATEGORY -->
+
+            <div class="form-group">
+
+                <label for="transactionCategory">
+                    Category
+                </label>
+
+                <select
+                    id="transactionCategory"
+                    required
+                >
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option value="Food">
+                        Food
+                    </option>
+
+                    <option value="Transport">
+                        Transport
+                    </option>
+
+                    <option value="Shopping">
+                        Shopping
+                    </option>
+
+                    <option value="Bills">
+                        Bills
+                    </option>
+
+                    <option value="Education">
+                        Education
+                    </option>
+
+                    <option value="Entertainment">
+                        Entertainment
+                    </option>
+
+                    <option value="Salary">
+                        Salary
+                    </option>
+
+                    <option value="Freelance">
+                        Freelance
+                    </option>
+
+                    <option value="Business">
+                        Business
+                    </option>
+
+                    <option value="Gift">
+                        Gift
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- AMOUNT -->
+
+            <div class="form-group">
+
+                <label for="transactionAmount">
+                    Amount
+                </label>
+
+                <div class="amount-input">
+
+                    <span id="currencySymbol">
+                        ₹
+                    </span>
+
+                    <input
+                        type="number"
+                        id="transactionAmount"
+                        placeholder="0.00"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div class="form-group">
+
+                <label for="transactionDate">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="transactionDate"
+                    required
+                >
+
+            </div>
+
+
+            <!-- NOTE -->
+
+            <div class="form-group">
+
+                <label for="transactionNote">
+                    Note
+                </label>
+
+                <textarea
+                    id="transactionNote"
+                    rows="3"
+                    placeholder="Add a note (optional)"
+                ></textarea>
+
+            </div>
+
+
+            <div class="modal-buttons">
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    onclick="closeTransactionModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    id="saveTransactionButton"
+                    class="save-transaction-button"
+                >
+                    Add Expense
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/transactions.js"></script>
+
+</body>
+</html>

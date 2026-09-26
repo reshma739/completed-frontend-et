@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MoneyBloom | Settings</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body data-protected="true">
+
+    <div class="app-layout">
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+
+            <div class="sidebar-logo">
+
+                <div class="sidebar-logo-icon">
+                    🌱
+                </div>
+
+                <div>
+
+                    <h2>
+                        MoneyBloom
+                    </h2>
+
+                    <span>
+                        Manage • Save • Grow
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <nav class="sidebar-nav">
+
+
+                <a
+                    href="dashboard.html"
+                    class="nav-item"
+                >
+
+                    <span>🏠</span>
+                    <span>Dashboard</span>
+
+                </a>
+
+
+
+                <a
+                    href="transactions.html"
+                    class="nav-item"
+                >
+
+                    <span>💸</span>
+                    <span>Transactions</span>
+
+                </a>
+
+
+
+                <a
+                    href="budget-savings.html"
+                    class="nav-item"
+                >
+
+                    <span>🌱</span>
+                    <span>Budget & Savings</span>
+
+                </a>
+
+
+
+                <a
+                    href="settings.html"
+                    class="nav-item active"
+                >
+
+                    <span>⚙️</span>
+                    <span>Settings</span>
+
+                </a>
+
+
+            </nav>
+
+
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+
+                <span>🚪</span>
+                <span>Logout</span>
+
+            </button>
+
+
+        </aside>
+
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <main class="main-content">
+
+
+            <!-- ================= TOP BAR ================= -->
+
+            <header class="topbar">
+
+
+                <div>
+
+                    <p class="page-label">
+                        MoneyBloom
+                    </p>
+
+                    <h1>
+                        Settings
+                    </h1>
+
+                </div>
+
+
+
+                <div class="profile-area">
+
+
+                    <div class="profile-icon">
+                        👤
+                    </div>
+
+
+                    <div class="profile-text">
+
+                        <span>
+                            Welcome
+                        </span>
+
+                        <strong id="userName">
+                            User
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </header>
+
+
+
+            <!-- ================= PAGE INTRO ================= -->
+
+            <section class="welcome-section">
+
+                <h2>
+                    Manage your preferences ⚙️
+                </h2>
+
+                <p>
+                    Customize your MoneyBloom experience.
+                </p>
+
+            </section>
+
+
+
+            <!-- ================= PROFILE ================= -->
+
+            <section class="settings-section">
+
+
+                <div class="settings-section-header">
+
+                    <h2>
+                        👤 Profile
+                    </h2>
+
+                    <p>
+                        Manage your personal information.
+                    </p>
+
+                </div>
+
+
+
+                <div class="settings-card">
+
+
+                    <div class="settings-field">
+
+                        <label for="profileName">
+                            Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="profileName"
+                            placeholder="Enter your name"
+                        >
+
+                    </div>
+
+
+
+                    <div class="settings-field">
+
+                        <label for="profileEmail">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="profileEmail"
+                            placeholder="Your email"
+                            readonly
+                        >
+
+                    </div>
+
+
+
+                    <div class="settings-actions">
+
+                        <button
+                            type="button"
+                            class="primary-button"
+                            onclick="saveProfile()"
+                        >
+                            Save Changes
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ================= CURRENCY ================= -->
+
+            <section class="settings-section">
+
+
+                <div class="settings-section-header">
+
+                    <h2>
+                        💰 Currency
+                    </h2>
+
+                    <p>
+                        Choose the currency used in MoneyBloom.
+                    </p>
+
+                </div>
+
+
+
+                <div class="settings-card">
+
+
+                    <div class="settings-field">
+
+                        <label for="currencySelect">
+                            Currency
+                        </label>
+
+
+                        <select id="currencySelect">
+
+                            <option value="INR">
+                                ₹ Indian Rupee (INR)
+                            </option>
+
+                            <option value="USD">
+                                $ US Dollar (USD)
+                            </option>
+
+                            <option value="EUR">
+                                € Euro (EUR)
+                            </option>
+
+                            <option value="GBP">
+                                £ British Pound (GBP)
+                            </option>
+
+                            <option value="JPY">
+                                ¥ Japanese Yen (JPY)
+                            </option>
+
+                        </select>
+
+
+                    </div>
+
+
+
+                    <div class="settings-actions">
+
+                        <button
+                            type="button"
+                            class="primary-button"
+                            onclick="saveCurrency()"
+                        >
+                            Save Currency
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ================= NOTIFICATIONS ================= -->
+
+            <section class="settings-section">
+
+
+                <div class="settings-section-header">
+
+                    <h2>
+                        🔔 Notifications
+                    </h2>
+
+                    <p>
+                        Choose which financial reminders you want.
+                    </p>
+
+                </div>
+
+
+
+                <div class="settings-card">
+
+
+                    <div class="setting-toggle">
+
+
+                        <div>
+
+                            <h3>
+                                Budget reminders
+                            </h3>
+
+                            <p>
+                                Get reminders when your spending approaches your budget.
+                            </p>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="budgetNotifications"
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+
+                    </div>
+
+
+
+                    <div class="setting-toggle">
+
+
+                        <div>
+
+                            <h3>
+                                Savings reminders
+                            </h3>
+
+                            <p>
+                                Receive reminders about your savings goals.
+                            </p>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="savingsNotifications"
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ================= ACCOUNT ================= -->
+
+            <section class="settings-section">
+
+
+                <div class="settings-section-header">
+
+                    <h2>
+                        🔐 Account
+                    </h2>
+
+                    <p>
+                        Manage your MoneyBloom account.
+                    </p>
+
+                </div>
+
+
+
+                <div class="settings-card">
+
+
+                    <button
+                        type="button"
+                        class="settings-danger-button"
+                        onclick="logout()"
+                    >
+
+                        🚪 Logout
+
+                    </button>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ================= DANGER ZONE ================= -->
+
+            <section class="settings-section danger-section">
+
+
+                <div class="settings-section-header">
+
+                    <h2>
+                        ⚠️ Danger Zone
+                    </h2>
+
+                    <p>
+                        Permanently remove your financial data.
+                    </p>
+
+                </div>
+
+
+
+                <div class="settings-card danger-card">
+
+
+                    <div>
+
+                        <h3>
+                            Clear all financial data
+                        </h3>
+
+                        <p>
+                            This will delete your transactions,
+                            budget and savings goals.
+                        </p>
+
+                    </div>
+
+
+
+                    <button
+                        type="button"
+                        class="clear-data-button"
+                        onclick="clearAllData()"
+                    >
+
+                        Clear Data
+
+                    </button>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+
+    <script src="js/settings.js"></script>
+
+
+</body>
+
+</html>

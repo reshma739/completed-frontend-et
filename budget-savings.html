@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MoneyBloom | Budget & Savings</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body data-protected="true">
+
+
+    <div class="app-layout">
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+
+            <div class="sidebar-logo">
+
+                <div class="sidebar-logo-icon">
+                    🌱
+                </div>
+
+                <div>
+
+                    <h2>
+                        MoneyBloom
+                    </h2>
+
+                    <span>
+                        Manage • Save • Grow
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+
+                <a
+                    href="dashboard.html"
+                    class="nav-item"
+                >
+
+                    <span>🏠</span>
+                    <span>Dashboard</span>
+
+                </a>
+
+
+                <a
+                    href="transactions.html"
+                    class="nav-item"
+                >
+
+                    <span>💸</span>
+                    <span>Transactions</span>
+
+                </a>
+
+
+                <a
+                    href="budget-savings.html"
+                    class="nav-item active"
+                >
+
+                    <span>🌱</span>
+                    <span>Budget & Savings</span>
+
+                </a>
+
+
+                <a
+                    href="settings.html"
+                    class="nav-item"
+                >
+
+                    <span>⚙️</span>
+                    <span>Settings</span>
+
+                </a>
+
+
+            </nav>
+
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+
+                <span>🚪</span>
+                <span>Logout</span>
+
+            </button>
+
+
+        </aside>
+
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <main class="main-content">
+
+
+            <!-- ================= TOP BAR ================= -->
+
+            <header class="topbar">
+
+
+                <div>
+
+                    <p class="page-label">
+                        MoneyBloom
+                    </p>
+
+                    <h1>
+                        Budget & Savings
+                    </h1>
+
+                </div>
+
+
+                <div class="profile-area">
+
+
+                    <div class="profile-icon">
+                        👤
+                    </div>
+
+
+                    <div class="profile-text">
+
+                        <span>
+                            Welcome
+                        </span>
+
+                        <strong id="userName">
+                            User
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </header>
+
+
+
+            <!-- ================= PAGE HEADER ================= -->
+
+            <section class="welcome-section">
+
+
+                <h2>
+                    Plan your money 🎯
+                </h2>
+
+
+                <p>
+                    Plan your spending and grow your savings.
+                </p>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MONTHLY BUDGET
+            ================================================== -->
+
+            <section class="budget-section">
+
+
+                <div class="section-title-row">
+
+
+                    <div>
+
+                        <h2>
+                            🎯 Monthly Budget
+                        </h2>
+
+                        <p>
+                            Keep track of your monthly spending.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        onclick="editBudget()"
+                    >
+
+                        ✏️ Edit Budget
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- ================= BUDGET CARD ================= -->
+
+                <div class="budget-card">
+
+
+                    <div class="budget-top">
+
+
+                        <div>
+
+                            <span class="small-label">
+                                Monthly Budget
+                            </span>
+
+
+                            <h3 id="budgetAmount">
+                                ₹10,000.00
+                            </h3>
+
+                        </div>
+
+
+                        <div class="budget-icon">
+                            💰
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="budget-details">
+
+
+                        <div>
+
+                            <span>
+                                Spent
+                            </span>
+
+                            <strong id="budgetSpent">
+                                ₹0.00
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Remaining
+                            </span>
+
+                            <strong id="budgetRemaining">
+                                ₹10,000.00
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Used
+                            </span>
+
+                            <strong id="budgetPercentage">
+                                0%
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="budget-progress-container">
+
+
+                        <div
+                            id="budgetProgress"
+                            class="budget-progress-bar"
+                        ></div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SAVINGS
+            ================================================== -->
+
+            <section class="savings-section">
+
+
+                <div class="section-title-row">
+
+
+                    <div>
+
+                        <h2>
+                            🌱 Savings Goals
+                        </h2>
+
+                        <p>
+                            Save towards the things that matter to you.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        onclick="openSavingsModal()"
+                    >
+
+                        + Add Savings Goal
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- ================= EMPTY STATE ================= -->
+
+                <div
+                    id="savingsEmpty"
+                    class="savings-empty"
+                >
+
+
+                    <div class="empty-icon">
+                        🌱
+                    </div>
+
+
+                    <h3>
+                        No savings goals yet
+                    </h3>
+
+
+                    <p>
+                        Create your first savings goal and start growing.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        onclick="openSavingsModal()"
+                    >
+
+                        + Create Goal
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- ================= GOALS ================= -->
+
+                <div
+                    id="savingsGoals"
+                    class="savings-goals"
+                ></div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         EDIT BUDGET MODAL
+    ================================================== -->
+
+    <div
+        id="budgetModal"
+        class="modal"
+    >
+
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+
+                <div>
+
+                    <h2>
+                        Edit Monthly Budget
+                    </h2>
+
+                    <p>
+                        Set your monthly spending limit.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    onclick="closeBudgetModal()"
+                >
+
+                    ×
+
+                </button>
+
+
+            </div>
+
+
+
+            <form
+                onsubmit="event.preventDefault(); saveBudget();"
+            >
+
+
+                <div class="form-group">
+
+
+                    <label for="budgetInput">
+                        Monthly Budget
+                    </label>
+
+
+                    <div class="amount-input">
+
+
+                        <span>
+                            ₹
+                        </span>
+
+
+                        <input
+                            type="number"
+                            id="budgetInput"
+                            placeholder="10000"
+                            min="1"
+                            step="0.01"
+                            required
+                        >
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="modal-buttons">
+
+
+                    <button
+                        type="button"
+                        class="cancel-button"
+                        onclick="closeBudgetModal()"
+                    >
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+
+                        Save Budget
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SAVINGS GOAL MODAL
+    ================================================== -->
+
+    <div
+        id="savingsModal"
+        class="modal"
+    >
+
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+
+                <div>
+
+                    <h2 id="savingsModalTitle">
+                        Add Savings Goal
+                    </h2>
+
+                    <p>
+                        Set a goal and start saving.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    onclick="closeSavingsModal()"
+                >
+
+                    ×
+
+                </button>
+
+
+            </div>
+
+
+
+            <form
+                onsubmit="event.preventDefault(); saveSavingsGoal();"
+            >
+
+
+                <!-- GOAL NAME -->
+
+                <div class="form-group">
+
+
+                    <label for="goalName">
+                        Goal Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="goalName"
+                        placeholder="e.g. New Laptop"
+                        required
+                    >
+
+
+                </div>
+
+
+
+                <!-- TARGET AMOUNT -->
+
+                <div class="form-group">
+
+
+                    <label for="goalTarget">
+                        Target Amount
+                    </label>
+
+
+                    <div class="amount-input">
+
+
+                        <span>
+                            ₹
+                        </span>
+
+
+                        <input
+                            type="number"
+                            id="goalTarget"
+                            placeholder="30000"
+                            min="1"
+                            step="0.01"
+                            required
+                        >
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TARGET DATE -->
+
+                <div class="form-group">
+
+
+                    <label for="goalDate">
+                        Target Date
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="goalDate"
+                        required
+                    >
+
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="modal-buttons">
+
+
+                    <button
+                        type="button"
+                        class="cancel-button"
+                        onclick="closeSavingsModal()"
+                    >
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="goalSubmitButton"
+                        class="primary-button"
+                    >
+
+                        Add Goal
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+
+    <script src="js/budget-savings.js"></script>
+
+
+</body>
+
+</html>
